@@ -112,28 +112,7 @@ public class Search {
 					first = true;
 				}
 				else {//if any of the user's inputs match a contact i show the contact's info
-					String[] info=currentLine.split(",");
-					if(f1 == -1 && f2 != -1) {
-						if(info[3].equals(String.valueOf(f2))) {
-							print_match_number(currentLine, fields, info, "mobile");
-						}
-					}
-					else if(f1 != -1 && f2 == -1) {
-						if(info[2].equals(String.valueOf(f1))) {
-							print_match_number(currentLine, fields, info, "phone");
-						}
-					}
-					else if (f1 != -1 && f2 != -1) {
-						if(info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
-							print_match_number(currentLine, fields, info, "phone and mobile");
-						}
-						else if(info[2].equals(String.valueOf(f1)) && !info[3].equals(String.valueOf(f2))) {
-							print_match_number(currentLine, fields, info, "phone");
-						}
-						else if(!info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
-							print_match_number(currentLine, fields, info, "mobile");
-						}
-					}					
+									
 				}			
 			}
 		}
@@ -164,8 +143,34 @@ public static void print_wrong_input(){
     System.out.println("You gave wrong information.");
 }
 
-public static void print_match_number(String currentLine,String[] fields,String[] info, String device){
-    System.out.println("----There is a contact for the "+device+" number you gave----");
-    Print.printInfo(currentLine, fields, info);
+public static void print_match_number(String currentLine,String[] fields, int f1, int f2){
+    
+    String[] info=currentLine.split(",");
+	if(f1 == -1 && f2 != -1) {
+            if(info[3].equals(String.valueOf(f2))) {
+                 System.out.println("----There is a contact for the mobile number you gave----");
+		Print.printInfo(currentLine, fields, info);
+            }
+	}
+	else if(f1 != -1 && f2 == -1) {
+            if(info[2].equals(String.valueOf(f1))) {
+                System.out.println("----There is a contact for the phone number you gave----");
+		Print.printInfo(currentLine, fields, info);
+            }
+	}
+	else if (f1 != -1 && f2 != -1) {
+            if(info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
+                System.out.println("----There is a contact for the phone and mobile number you gave----");
+		Print.printInfo(currentLine, fields, info);
+            }
+            else if(info[2].equals(String.valueOf(f1)) && !info[3].equals(String.valueOf(f2))) {
+                System.out.println("----There is a contact for the phone number you gave----");
+                Print.printInfo(currentLine, fields, info);
+            }
+            else if(!info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
+                System.out.println("----There is a contact for the mobile number you gave----");
+                Print.printInfo(currentLine, fields, info);
+            }
+	}	
 }
 }
