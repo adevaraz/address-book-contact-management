@@ -8,21 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Delete {
 	public static void choose_field() throws FileNotFoundException, IOException {
-		Scanner input = new Scanner(System.in);
+		
 		int exit = 0;
 		int answer;
 		//we will loop until user wants to exit the application
 		do {//according to user's input i go to the correct method
-			System.out.println("Do you want to delete a contact based on the name or the phone number?");
-			System.out.println("Give '1', '2' or '0' to go back to main menu.");	
-			try {
-				answer = input.nextInt();
-			} catch (Exception e) {
-				answer = 0;
-			}
-			if(answer == 1) 
+                        deleteMenu();
+			answer = choose();
+                        if(answer == 1) 
 				name_search();				
 			else if(answer == 2)
 				number_search();
@@ -32,11 +28,11 @@ public class Delete {
 	
 	public static void name_search() throws IOException, FileNotFoundException{
 		Scanner input= new Scanner(System.in);
-		String f1,f2;
+		String name,surname;
 		System.out.println("Give Name: ");
-		f1 = input.nextLine();
+		name = input.nextLine();
 		System.out.println("Give Surname: ");
-		f2 = input.nextLine();
+		surname = input.nextLine();
 		File file = new File(System.getProperty("user.dir")+"/src/contacts.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String currentLine;
@@ -50,27 +46,16 @@ public class Delete {
 			}
 			else {// only if both of the user's inputs (name and surname) match a contact then i add this contact's info to an array
 				String[] info=currentLine.split(",");
-				if(info[0].equals(f1) && info[1].equals(f2)) {
-					System.out.println("----There is a contact for the information you gave----");
-					for (int i = 0; i < fields.length; i++ ) {
-						System.out.println(fields[i] +": "+ info[i]);					
-					}
+				if(info[0].equals(name) && info[1].equals(surname)) {
+					rightInformation(fields, info);
 					//contact_change(currentLine);
 					lines.add(currentLine);
 				}
-				else if(info[0].equals(f1) && !info[1].equals(f2)) {
-					System.out.println("----There is a contact for the Name you gave----");
-					for (int i = 0; i < fields.length; i++ ) {
-						System.out.println(fields[i] +": "+ info[i]);					
-					}
-					System.out.println("----Name ans Surname must be valid----");
+				else if(info[0].equals(name) && !info[1].equals(surname)) {
+					halfRightInformation(fields, info, "name");
 				}
-				else if(!info[0].equals(f1) && info[1].equals(f2)) {
-					System.out.println("----There is a contact for the Surname you gave----");
-					for (int i = 0; i < fields.length; i++ ) {
-						System.out.println(fields[i] +": "+ info[i]);					
-					}
-					System.out.println("----Name and Surname must be valid----");
+				else if(!info[0].equals(name) && info[1].equals(surname)) {
+					halfRightInformation(fields, info, "surname");
 				}
 				
 			}
@@ -85,14 +70,14 @@ public class Delete {
 	
 	public static void number_search() throws IOException, FileNotFoundException{
 		Scanner input= new Scanner(System.in);
-		int f1 = -1;
-		int f2 = -1;
+		int phone = -1;
+		int mobile = -1;
 		boolean valid;
 		System.out.println("Give Phone number: ");
 		do {
 			valid = true;
 			try {
-			    f1 = Integer.parseInt(input.nextLine());
+			    phone = Integer.parseInt(input.nextLine());
 			} catch (NumberFormatException e) {
 			    //e.printStackTrace();
 				valid = false;
@@ -102,7 +87,7 @@ public class Delete {
 		do {
 			valid = true;
 			try {
-			    f2 = Integer.parseInt(input.nextLine());
+			    mobile = Integer.parseInt(input.nextLine());
 			} catch (NumberFormatException e) {
 			    //e.printStackTrace();
 				valid = false;
@@ -113,9 +98,8 @@ public class Delete {
 		String currentLine;
 		boolean first = false;
 		String[] fields = new String[0];
-		if(f1 == -1 && f2 == -1) {
-			System.out.println("-------------------");
-			System.out.println("You gave wrong information.");
+		if(phone == -1 && mobile == -1) {
+                    wrongInformation();
 		}
 		else {
 			while((currentLine = reader.readLine()) !=null) {
@@ -125,45 +109,26 @@ public class Delete {
 				}
 				else {
 					String[] info=currentLine.split(",");
-					if(f1 == -1 && f2 != -1) {
-						if(info[3].equals(String.valueOf(f2))) {
-							System.out.println("----There is a contact for the Mobile number you gave----");
-							for (int i = 0; i < fields.length; i++ ) {
-								System.out.println(fields[i] +": "+ info[i]);					
-							}
-							System.out.println("----Phone and Mobile numbers must be valid----");
+					if(phone == -1 && mobile != -1) {
+						if(info[3].equals(String.valueOf(mobile))) {
+                                                    halfRightInformation(fields, info, "mobile number");
 						}
 					}
-					else if(f1 != -1 && f2 == -1) {
-						if(info[2].equals(String.valueOf(f1))) {
-							System.out.println("----There is a contact for the Phone number you gave----");
-							for (int i = 0; i < fields.length; i++ ) {
-								System.out.println(fields[i] +": "+ info[i]);					
-							}
-							System.out.println("----Phone and Mobile numbers must be valid----");
+					else if(phone != -1 && mobile == -1) {
+						if(info[2].equals(String.valueOf(phone))) {
+                                                    halfRightInformation(fields, info, "phone number");
 						}
 					}
-					else if (f1 != -1 && f2 != -1) {
-						if(info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
-							System.out.println("----There is a contact for the information you gave----");
-							for (int i = 0; i < fields.length; i++ ) {
-								System.out.println(fields[i] +": "+ info[i]);					
-							}
+					else if (phone != -1 && mobile != -1) {
+						if(info[2].equals(String.valueOf(phone)) && info[3].equals(String.valueOf(mobile))) {
+                                                        rightInformation(fields, info);
 							contact_delete(currentLine);
 						}
-						else if(info[2].equals(String.valueOf(f1)) && !info[3].equals(String.valueOf(f2))) {
-							System.out.println("----There is a contact for the Phone number you gave----");
-							for (int i = 0; i < fields.length; i++ ) {
-								System.out.println(fields[i] +": "+ info[i]);					
-							}
-							System.out.println("----Phone and Mobile numbers must be valid----");
+						else if(info[2].equals(String.valueOf(phone)) && !info[3].equals(String.valueOf(mobile))) {
+                                                        halfRightInformation(fields, info, "phone number");
 						}
-						else if(!info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
-							System.out.println("----There is a contact for the Mobile number you gave----");
-							for (int i = 0; i < fields.length; i++ ) {
-								System.out.println(fields[i] +": "+ info[i]);					
-							}
-							System.out.println("----Phone and Mobile numbers must be valid----");
+						else if(!info[2].equals(String.valueOf(phone)) && info[3].equals(String.valueOf(mobile))) {
+                                                    halfRightInformation(fields, info, "mobile number");
 						}
 					}					
 				}			
@@ -200,5 +165,46 @@ public class Delete {
 		System.out.println("Information was valid, deletion completed successfully");
 	}	
 	
+        public static void deleteMenu(){
+            
+            System.out.println("Delete contact based on");
+            System.out.println("1. Name");	
+            System.out.println("2. Phone Number");
+            System.out.println("0. Back to menu");
+        }
 	
+        public static int choose(){
+            int answer;
+            Scanner input = new Scanner(System.in);
+            
+            System.out.print("Pilih : ");
+            try {//we handle the input of the user
+		answer = input.nextInt();
+            } catch (NumberFormatException e) {
+                //e.printStackTrace();
+		answer = 0;
+            }
+            return answer;
+        }
+        
+        public static void printContact(String[] fields, String[] info){
+            for (int i = 0; i < fields.length; i++ ) {
+		System.out.println(fields[i] +": "+ info[i]);					
+            }
+        }
+        
+        public static void rightInformation(String[] fields, String[] info){
+            System.out.println("----There is a contact for the information you gave----");
+            printContact(fields, info);
+        }
+        
+        public static void halfRightInformation(String[] fields, String[] info, String rightInfo){
+            System.out.println("----There is a contact for the " + rightInfo + " you gave----");
+            printContact(fields, info);
+            System.out.println("----Information must be valid----");
+        }
+        public static void wrongInformation(){
+            System.out.println("-------------------");
+            System.out.println("You gave wrong information.");
+        }
 }
