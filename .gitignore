@@ -56,3 +56,5 @@ nb-configuration.xml
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
+/JavaApplication30/nbproject/private/
+/contact-management/nbproject/private/
