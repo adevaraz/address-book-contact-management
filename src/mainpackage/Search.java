@@ -17,18 +17,13 @@ import java.util.Scanner;
 
 public class Search {
 	public static void choose_field() throws FileNotFoundException, IOException {
-		Scanner input = new Scanner(System.in);
+		
 		int exit = 0;
 		int answer;
 		//we will loop until user wants to exit the application
 		do {
-			System.out.println("Do you want to search beased on name or based on phone?");
-			System.out.println("Give '1' or '2' or anser '0' to return to main menu.");	
-			try {
-				answer = input.nextInt();
-			} catch (Exception e) {
-				answer = 0;
-			}
+			print_option();	
+			answer = choose_method();
 			if(answer == 1)//according to user's input i go to the correct method
 				name_search();
 			else if(answer == 2)
@@ -37,6 +32,20 @@ public class Search {
 		}while(answer != exit);
 	}
 	
+        public static void print_option(){
+            System.out.println("Do you want to search beased on name or based on phone?");
+            System.out.println("Give '1' or '2' or anser '0' to return to main menu.");
+        }
+        public static int choose_method(){
+            Scanner input = new Scanner(System.in);
+            int method;
+            try {
+		method = input.nextInt();
+            } catch (Exception e) {
+		method = 0;
+            }
+            return method;
+        }
 	public static void name_search() throws IOException, FileNotFoundException{
 		Scanner input= new Scanner(System.in);
 		String f1,f2;
@@ -55,25 +64,7 @@ public class Search {
 				first = true;
 			}
 			else {//if both fields that the user gave match a contact i show contact's info
-				String[] info=currentLine.split(",");
-				if(info[0].equals(f1) && info[1].equals(f2)) {
-					System.out.println("----There is a contact for the information you gave----");
-					for (int i = 0; i < fields.length; i++ ) {
-						System.out.println(fields[i] +": "+ info[i]);					
-					}
-				}
-				else if(info[0].equals(f1) && !info[1].equals(f2)) {//if one of the fields that the user gave match a contact i show contact's info
-					System.out.println("----There is a contact for the Name you gave----");
-					for (int i = 0; i < fields.length; i++ ) {
-						System.out.println(fields[i] +": "+ info[i]);					
-					}
-				}
-				else if(!info[0].equals(f1) && info[1].equals(f2)) {//if one of the fields that the user gave match a contact i show contact's info
-					System.out.println("----There is a contact for the Surname you gave----");
-					for (int i = 0; i < fields.length; i++ ) {
-						System.out.println(fields[i] +": "+ info[i]);					
-					}
-				}
+                            print_match_name(currentLine, fields, f1, f2);
 				
 			}
 		}
@@ -81,42 +72,38 @@ public class Search {
 		reader.close();
 		choose_field();
 	}
+        public static void print_match_name(String currentLine, String fields[], String f1, String f2){
+            String[] info=currentLine.split(",");
+            if(info[0].equals(f1) && info[1].equals(f2)) {
+		System.out.println("----There is a contact for the information you gave----");
+		Print.printInfo(currentLine, fields, info);
+            }
+            else if(info[0].equals(f1) && !info[1].equals(f2)) {//if one of the fields that the user gave match a contact i show contact's info
+		System.out.println("----There is a contact for the Name you gave----");
+		Print.printInfo(currentLine, fields, info);
+            }
+            else if(!info[0].equals(f1) && info[1].equals(f2)) {//if one of the fields that the user gave match a contact i show contact's info
+		System.out.println("----There is a contact for the Surname you gave----");
+		Print.printInfo(currentLine, fields, info);
+		}
+        }
 	
 	public static void number_search() throws IOException, FileNotFoundException{
-		Scanner input= new Scanner(System.in);
+		
 		int f1 = -1;
 		int f2 = -1;
 		boolean valid;
 		System.out.println("Give Phone number: ");
-		do {//this is a do-while loop in which I check for valid input (must me integer)
-			valid = true;
-			try {
-			    f1 = Integer.parseInt(input.nextLine());
-			} catch (NumberFormatException e) {
-			    //e.printStackTrace();
-				System.out.println("Phone number must be number.");
-				valid = false;
-			}
-		}while(valid == false);
+		f1 = check_valid_input("Phone");
 		System.out.println("Give mobile number: ");
-		do {
-			valid = true;
-			try {
-			    f2 = Integer.parseInt(input.nextLine());
-			} catch (NumberFormatException e) {
-			    //e.printStackTrace();
-				System.out.println("Mobile number must be number.");
-				valid = false;
-			}
-		}while(valid == false);
+		f2 = check_valid_input("Mobile");
 		File file = new File(System.getProperty("user.dir")+"/src/contacts.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String currentLine;
 		boolean first = false;
 		String[] fields = new String[0];
 		if(f1 == -1 && f2 == -1) {
-			System.out.println("-------------------");
-			System.out.println("You gave wrong information.");
+                    print_wrong_input();
 		}
 		else {
 			while((currentLine = reader.readLine()) !=null) {
@@ -128,38 +115,23 @@ public class Search {
 					String[] info=currentLine.split(",");
 					if(f1 == -1 && f2 != -1) {
 						if(info[3].equals(String.valueOf(f2))) {
-							System.out.println("----There is a contact for the Mobile number you gave----");
-							for (int i = 0; i < fields.length; i++ ) {
-								System.out.println(fields[i] +": "+ info[i]);					
-							}
+							print_match_number(currentLine, fields, info, "mobile");
 						}
 					}
 					else if(f1 != -1 && f2 == -1) {
 						if(info[2].equals(String.valueOf(f1))) {
-							System.out.println("----There is a contact for the Phone number you gave----");
-							for (int i = 0; i < fields.length; i++ ) {
-								System.out.println(fields[i] +": "+ info[i]);					
-							}
+							print_match_number(currentLine, fields, info, "phone");
 						}
 					}
 					else if (f1 != -1 && f2 != -1) {
 						if(info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
-							System.out.println("----There is a contact for the Phone and Mobile number you gave----");
-							for (int i = 0; i < fields.length; i++ ) {
-								System.out.println(fields[i] +": "+ info[i]);					
-							}
+							print_match_number(currentLine, fields, info, "phone and mobile");
 						}
 						else if(info[2].equals(String.valueOf(f1)) && !info[3].equals(String.valueOf(f2))) {
-							System.out.println("----There is a contact for the Phone number you gave----");
-							for (int i = 0; i < fields.length; i++ ) {
-								System.out.println(fields[i] +": "+ info[i]);					
-							}
+							print_match_number(currentLine, fields, info, "phone");
 						}
 						else if(!info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
-							System.out.println("----There is a contact for the Phone number you gave----");
-							for (int i = 0; i < fields.length; i++ ) {
-								System.out.println(fields[i] +": "+ info[i]);					
-							}
+							print_match_number(currentLine, fields, info, "mobile");
 						}
 					}					
 				}			
@@ -170,6 +142,30 @@ public class Search {
 		reader.close();
 		choose_field();
 	}
+public static int check_valid_input(String device){
+     Scanner input= new Scanner(System.in);
+     int number=-1;
+     boolean valid;
+     do {//this is a do-while loop in which I check for valid input (must me integer)
+			valid = true;
+			try {
+			    number = Integer.parseInt(input.nextLine());
+			} catch (NumberFormatException e) {
+			    //e.printStackTrace();
+				System.out.println(device+" number must be number.");
+				valid = false;
+			}
+    }while(valid == false);
+        return number;
+}
 
+public static void print_wrong_input(){
+    System.out.println("-------------------");
+    System.out.println("You gave wrong information.");
+}
 
+public static void print_match_number(String currentLine,String[] fields,String[] info, String device){
+    System.out.println("----There is a contact for the "+device+" number you gave----");
+    Print.printInfo(currentLine, fields, info);
+}
 }
