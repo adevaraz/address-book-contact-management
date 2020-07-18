@@ -23,7 +23,7 @@ public class Main {
                                 Print.show_contacts();
                                 break;
                             case 2:
-                                Add.add_contact();
+                                Add.addContact();
                                 break;
                             case 3:
                                 Search.choose_field();
