@@ -33,4 +33,11 @@ public class Display {
             System.out.println(fields[i] +": "+ info[i]);					
 		}
 	}
+        public void displayAllBlocked(String[] fields, String[] info) {
+            List<BlockContact> blockedContact = service.getBlockedContact();
+		
+            for (int i = 0; i < blockedContact.size(); i++ ) {
+                System.out.println(fields[i] +": "+ info[i]);					
+            }
+	}
 }

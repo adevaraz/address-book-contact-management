@@ -85,7 +85,7 @@ public class ContactAppService {
 		
 		return tmpList;
 	}
-	
+        
 	public Contact searchByName(Name name) {
 		Contact tmpContact = null;
 		List<Contact> contactList = ascendingContact();
@@ -115,4 +115,17 @@ public class ContactAppService {
 		
 		return tmpContact;
 	}
+        
+        public List<BlockContact> getBlockedContact() {
+		List<BlockContact> tmpList = new ArrayList<>();
+		Iterator<BlockContact> iter = blockContactList.iterator();
+		
+		while(iter.hasNext()) {
+			BlockContact tmp = iter.next();
+			tmpList.add(tmp);
+		}
+		
+		return tmpList;
+	}
+	
 }
