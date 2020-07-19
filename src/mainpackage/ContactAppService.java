@@ -17,8 +17,8 @@ public class ContactAppService {
 		
 		this.contactRepo = contactRepo;
 		this.blockedContactRepo = blockedContactRepo;
-		this.regContactList = contactRepo.readAllContacts();
-		this.blockContactList = blockedContactRepo.readBlockedContact();
+//		this.regContactList = contactRepo.readAllContacts();
+//		this.blockContactList = blockedContactRepo.readBlockedContact();
 	}
 	
 	public List<Contact> ascendingContact() {
@@ -116,8 +116,8 @@ public class ContactAppService {
 		return tmpContact;
 	}
         
-    public List<BlockContact> getBlockedContact() throws FileNotFoundException {
-    	return blockedContactRepo.readBlockedContact();
-	}
+//    public List<BlockContact> getBlockedContact() throws FileNotFoundException {
+//    	return blockedContactRepo.readBlockedContact();
+//	}
 	
 }

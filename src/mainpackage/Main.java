@@ -14,6 +14,9 @@ public class Main {
 		BlockedContactRepository blockContactRepo = new BlockedContactRepository();
 		ContactAppService service = new ContactAppService(contactRepo, blockContactRepo);
 		Display display = new Display(service);
+//		List<Contact> contacts = new ArrayList<>();
+		List<RegularContact> regContacts = new ArrayList<>();
+		List<BlockContact> blockContacts = new ArrayList<>();
 		
 		int exit = 0;
 		int answer;
@@ -24,28 +27,37 @@ public class Main {
 			switch(answer)
                         {
                             case 1:
-                                Print.showContacts();
+                                display.displayAllContactAsc();
                                 break;
                             case 2:
-                                Add.addContact();
+                            	// TODO read data from user
+                            	// service.contactRepo.addContact(regContacts, new RegularContact());
                                 break;
                             case 3:
-                                Search.chooseField();
+                            	// TODO display submenu search
+                            	// switch case search
+                            	// case 1 : service.searchByName(name);
+                            	// case 2 : service.searchByNumber(number); 
                                 break;
                             case 4:
-                                Change.chooseField();
+                            	// TODO display submenu change/update isinya minta input nama/number
+                            	// switch case idem search
+                            	// search
+                            	// update
                                 break;
                             case 5:
-                                Delete.chooseField();
+                            	// TODO display minta input nama/number
+                            	// search (must) by number
+                            	// remove (pake remove yg ada di service)
                                 break;
                             case 0:
                                 break;
-                            default:                             
+                                
+                            default:                    
                                 System.out.println("Invalid request");
                                 break;
                         }
-				
-			
+
 		}while(answer != exit);
 		System.out.println("Application terminating...");
 	}
@@ -59,7 +71,6 @@ public class Main {
         try {//we handle the input of the user
         	answer = input.nextInt();
         } catch (NumberFormatException e) {
-                //e.printStackTrace();
         	answer = -1;
         }
             return answer;

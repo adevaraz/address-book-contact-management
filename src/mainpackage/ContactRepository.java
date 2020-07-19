@@ -48,34 +48,34 @@ public class ContactRepository {
 		}
     }
     
-	public List<RegularContact> readAllContacts() throws FileNotFoundException {
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		List<RegularContact> tmpContactList = new ArrayList<>();
-		String currentLine;
-		boolean firstLine = true;
-		
-		try {
-			while((currentLine = reader.readLine()) != null) {
-				if(firstLine) {
-					firstLine = false;
-				} else {
-					String[] data = currentLine.split(",");
-					Name name = new Name(data[0], data[1]);
-					Number number = new Number(data[2], data[3]);
-					Address address = new Address(data[5], Integer.parseInt(data[6]), data[7], Integer.parseInt(data[8]));
-
-					RegularContact tmpContact = new RegularContact(name, address, data[4], number);
-					tmpContactList.add(tmpContact);
-				}
-			}
-			
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-        
-        return tmpContactList;
-	}
+//	public List<RegularContact> readAllContacts() throws FileNotFoundException {
+//		BufferedReader reader = new BufferedReader(new FileReader(file));
+//		List<RegularContact> tmpContactList = new ArrayList<>();
+//		String currentLine;
+//		boolean firstLine = true;
+//		
+//		try {
+//			while((currentLine = reader.readLine()) != null) {
+//				if(firstLine) {
+//					firstLine = false;
+//				} else {
+//					String[] data = currentLine.split(",");
+//					Name name = new Name(data[0], data[1]);
+//					Number number = new Number(data[2], data[3]);
+//					Address address = new Address(data[5], Integer.parseInt(data[6]), data[7], Integer.parseInt(data[8]));
+//
+//					RegularContact tmpContact = new RegularContact(name, address, data[4], number);
+//					tmpContactList.add(tmpContact);
+//				}
+//			}
+//			
+//			reader.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//        
+//        return tmpContactList;
+//	}
 	
 	public void updateFile(String line, String nData) throws IOException {
 		File tmpFile = new File(System.getProperty(dir) + "/src/contactstemp.txt");

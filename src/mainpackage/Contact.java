@@ -7,4 +7,6 @@ public interface Contact {
 
 	public Name getName();
 	public Number getNumber();
+	public Address getAddress();
+	public String getEmail();
 }
