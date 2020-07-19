@@ -10,12 +10,12 @@ import java.nio.charset.Charset;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
-		Display display;
+		
 		int exit = 0;
 		int answer;
 		//we will loop until user wants to exit the application
 		do {
-            display.displayMenu();
+            
 			answer = choose();
 			switch(answer)
                         {
