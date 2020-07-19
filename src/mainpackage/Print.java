@@ -6,7 +6,7 @@ import java.io.IOException;
 
 
 public class Print extends Main{
-    public static void show_contacts() throws IOException, FileNotFoundException{
+    public static void showContacts() throws IOException, FileNotFoundException{
 	File file = new File(System.getProperty("user.dir")+"/src/contacts.txt");//we get the cantact file 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String currentLine;

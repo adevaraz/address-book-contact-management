@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Change {
-	public static void choose_field() throws FileNotFoundException, IOException {
+	public static void chooseField() throws FileNotFoundException, IOException {
 		Scanner input = new Scanner(System.in);
 		int exit = 0;
 		int answer;
@@ -74,7 +74,7 @@ public class Change {
 		for(Object str:lines){//for every contact that i found that is a match
 			infoCheck(str.toString(), fields);
 		} 
-		choose_field();
+		chooseField();
 	}
 	
 	public static void numberSearch() throws IOException, FileNotFoundException{
@@ -149,7 +149,7 @@ public class Change {
 		for(Object str:lines){
 			infoCheck(str.toString(), fields);
 		} 
-		choose_field();
+		chooseField();
 	}
         
         public static boolean isValueEmpty(String name, String surname, String email,

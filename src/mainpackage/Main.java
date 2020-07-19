@@ -20,19 +20,19 @@ public class Main {
 			switch(answer)
                         {
                             case 1:
-                                Print.show_contacts();
+                                Print.showContacts();
                                 break;
                             case 2:
                                 Add.addContact();
                                 break;
                             case 3:
-                                Search.choose_field();
+                                Search.chooseField();
                                 break;
                             case 4:
-                                Change.choose_field();
+                                Change.chooseField();
                                 break;
                             case 5:
-                                Delete.choose_field();
+                                Delete.chooseField();
                                 break;
                             case 0:
                                 break;

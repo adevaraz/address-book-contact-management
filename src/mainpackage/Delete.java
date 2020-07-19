@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 
 public class Delete {
-	public static void choose_field() throws FileNotFoundException, IOException {
+	public static void chooseField() throws FileNotFoundException, IOException {
 		
 		int exit = 0;
 		int answer;
@@ -65,7 +65,7 @@ public class Delete {
 		for(Object str:lines){//for every contatc that i found that is a match
 			contact_delete(str.toString());
 		} 
-		choose_field();
+		chooseField();
 	}
 	
 	public static void number_search() throws IOException, FileNotFoundException{
@@ -137,7 +137,7 @@ public class Delete {
 		
 		System.out.println("-------------------");
 		reader.close();
-		choose_field();
+		chooseField();
 	}
 	
 	public static void contact_delete(String line)  throws IOException, FileNotFoundException{

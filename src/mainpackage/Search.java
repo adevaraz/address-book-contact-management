@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 
 public class Search {
-	public static void choose_field() throws FileNotFoundException, IOException {
+	public static void chooseField() throws FileNotFoundException, IOException {
 		
 		int exit = 0;
 		int answer;
@@ -70,7 +70,7 @@ public class Search {
 		}
 		System.out.println("-------------------");
 		reader.close();
-		choose_field();
+		chooseField();
 	}
         public static void print_match_name(String currentLine, String fields[], String f1, String f2){
             String[] info=currentLine.split(",");
@@ -119,7 +119,7 @@ public class Search {
 		
 		System.out.println("-------------------");
 		reader.close();
-		choose_field();
+		chooseField();
 	}
 public static int check_valid_input(String device){
      Scanner input= new Scanner(System.in);
