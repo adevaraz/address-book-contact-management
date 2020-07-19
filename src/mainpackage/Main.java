@@ -10,12 +10,16 @@ import java.nio.charset.Charset;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
+		ContactRepository contactRepo = new ContactRepository();
+		BlockedContactRepository blockContactRepo = new BlockedContactRepository();
+		ContactAppService service = new ContactAppService(contactRepo, blockContactRepo);
+		Display display = new Display(service);
 		
 		int exit = 0;
 		int answer;
 		//we will loop until user wants to exit the application
 		do {
-            
+            display.displayMenu();
 			answer = choose();
 			switch(answer)
                         {
