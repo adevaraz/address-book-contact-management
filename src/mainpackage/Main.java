@@ -31,7 +31,17 @@ public class Main {
                                 break;
                             case 2:
                             	// TODO read data from user
-                            	// service.contactRepo.addContact(regContacts, new RegularContact());
+                                Scanner input= new Scanner(System.in);
+                                System.out.println("Give name, and surname");
+                                Name name = new Name(input.nextLine(), input.nextLine());
+                                System.out.println("Give street, street number, town, zipcode");
+                                Address address = new Address(input.nextLine(), input.nextInt(), input.nextLine(), input.nextInt());
+                                System.out.println("Give email");
+                                String email = input.nextLine();
+                                System.out.println("Give phone number and mobile number");
+                                Number number = new Number(input.nextLine(), input.nextLine());
+                            	service.contactRepo.addContact(regContacts, new RegularContact(name, address, email, number));
+                            	
                                 break;
                             case 3:
                             	// TODO display submenu search
