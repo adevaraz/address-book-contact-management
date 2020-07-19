@@ -1,6 +1,6 @@
 package mainpackage;
 
-public class concreteRegularFactory extends ContactFactory {
+public class ConcreteRegularFactory extends ContactFactory {
 	
 	@Override
 	public Contact createContact(Name name, Address address, String email, Number number) {

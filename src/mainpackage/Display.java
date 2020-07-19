@@ -17,16 +17,18 @@ public class Display {
         System.out.println("5. Delete Contact");
         System.out.println("0. Exit");
 	}
+	
 	public void displayAllFavorite(String[] fields, String[] info) {
 		List<Contact> favContact = service.getFavoriteContact();
 		for (int i = 0; i < favContact.length; i++ ) {
             System.out.println(fields[i] +": "+ info[i]);					
+		}
 	}
-	}
+	
 	public void displayAllUrgent(String[] fields, String[] info) {
 		List<Contact> urgentContact = service.getUrgentContact();
 		for (int i = 0; i < urgentContact.length; i++ ) {
             System.out.println(fields[i] +": "+ info[i]);					
-	}
+		}
 	}
 }
