@@ -60,10 +60,12 @@ public class ContactRepository {
 					firstLine = false;
 				} else {
 					String[] data = currentLine.split(",");
-					
-					//TODO Create contact
-//					Contact tmpContact = new RegularContact(data[0], data[1]);
-//					tmpContactList.add(tmpContact);
+					Name name = new Name(data[0], data[1]);
+					Number number = new Number(data[2], data[3]);
+					Address address = new Address(data[5], Integer.parseInt(data[6]), data[7], Integer.parseInt(data[8]));
+
+					RegularContact tmpContact = new RegularContact(name, address, data[4], number);
+					tmpContactList.add(tmpContact);
 				}
 			}
 			
