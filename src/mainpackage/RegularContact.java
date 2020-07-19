@@ -1,7 +1,6 @@
 package mainpackage;
 
 public class RegularContact implements Contact {
-<<<<<<< HEAD
 	private Name name;
 	private Address address;
 	private String email;

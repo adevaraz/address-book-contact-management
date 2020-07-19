@@ -63,7 +63,7 @@ public class ContactAppService {
 		while(iter.hasNext()) {
 			RegularContact tmp = iter.next();
 					
-			if(tmp.favorite) {
+			if(tmp.isFavorite()) {
 				tmpList.add(tmp);
 			}
 		}
@@ -78,7 +78,7 @@ public class ContactAppService {
 		while(iter.hasNext()) {
 			RegularContact tmp = iter.next();
 					
-			if(tmp.urgent) {
+			if(tmp.isUrgent()) {
 				tmpList.add(tmp);
 			}
 		}

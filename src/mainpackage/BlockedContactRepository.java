@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-package mainpackage;
-
-public class BlockedContactRepository {
-        
-    public void displayBlockedContact(String[] fields, String info){
-        
-    }
-}
-=======
 package mainpackage;
 
 import java.io.BufferedReader;
@@ -110,4 +100,4 @@ public class BlockedContactRepository {
         return tmpContactList;
 	}
 }
->>>>>>> implementing method for blocked contact
+

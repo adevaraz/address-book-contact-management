@@ -107,7 +107,7 @@ public class ContactRepository {
 		if(isExist(contactList, contact)) {
 			// Replace the changed contact
 			int i = contactList.indexOf(contact);
-			contact.favorite = true;
+			contact.setFavorite(true);
 			contactList.add(i, contact);
 			
 			updateFile(contactList.get(i).toString(), contact.toString());
@@ -118,7 +118,7 @@ public class ContactRepository {
 		if(isExist(contactList, contact)) {
 			// Replace the changed contact
 			int i = contactList.indexOf(contact);
-			contact.urgent = true;
+			contact.setUrgent(true);
 			contactList.add(i, contact);
 			
 			updateFile(contactList.get(i).toString(), contact.toString());
@@ -126,10 +126,10 @@ public class ContactRepository {
 	}
 	
 	public void undoFavorite(List<RegularContact> contactList, RegularContact contact) throws IOException {
-		if(contact.getFavorite()) {
+		if(contact.isFavorite()) {
 			// Replace the changed contact
 			int i = contactList.indexOf(contact);
-			contact.favorite = false;
+			contact.setFavorite(false);
 			contactList.add(i, contact);
 			
 			updateFile(contactList.toString(), contact.toString());
@@ -137,10 +137,10 @@ public class ContactRepository {
 	}
 	
 	public void undoUrgent(List<RegularContact> contactList, RegularContact contact) throws IOException {
-		if(contact.getFavorite()) {
+		if(contact.isUrgent()) {
 			// Replace the changed contact
 			int i = contactList.indexOf(contact);
-			contact.urgent = false;
+			contact.setUrgent(false);;
 			contactList.add(i, contact);
 			
 			updateFile(contactList.toString(), contact.toString());

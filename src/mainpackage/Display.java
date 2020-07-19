@@ -1,6 +1,6 @@
 package mainpackage;
 
-import java.awt.List;
+import java.util.List;
 
 public class Display {
 	ContactAppService service;
@@ -19,15 +19,17 @@ public class Display {
 	}
 	
 	public void displayAllFavorite(String[] fields, String[] info) {
-		List<Contact> favContact = service.getFavoriteContact();
-		for (int i = 0; i < favContact.length; i++ ) {
+		List<RegularContact> favContact = service.getFavoriteContact();
+		
+		for (int i = 0; i < favContact.size(); i++ ) {
             System.out.println(fields[i] +": "+ info[i]);					
 		}
 	}
 	
 	public void displayAllUrgent(String[] fields, String[] info) {
-		List<Contact> urgentContact = service.getUrgentContact();
-		for (int i = 0; i < urgentContact.length; i++ ) {
+		List<RegularContact> urgentContact = service.getUrgentContact();
+		
+		for (int i = 0; i < urgentContact.size(); i++ ) {
             System.out.println(fields[i] +": "+ info[i]);					
 		}
 	}
