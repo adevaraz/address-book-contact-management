@@ -3,6 +3,23 @@
   <groupId>contact-management</groupId>
   <artifactId>contact-management</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+ 
+  <properties>
+        <maven-compiler-plugin.source>8</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>8</maven-compiler-plugin.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mongodb-driver-sync.version>3.11.0</mongodb-driver-sync.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>${mongodb-driver-sync.version}</version>
+        </dependency>
+    </dependencies>
+  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
