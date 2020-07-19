@@ -133,7 +133,7 @@ public class Change {
 							}
 							lines.add(currentLine);
                                                         
-                                                        found = true;
+                            found = true;
 						}
 					}					
 				}			
