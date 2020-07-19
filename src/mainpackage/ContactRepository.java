@@ -77,12 +77,27 @@ public class ContactRepository {
 //        return tmpContactList;
 //	}
 	
-	public void updateFile(String line, String nData) throws IOException {
+    public String toString(Contact contact) {
+    	
+    	return contact.getName().getFirstName() + "," + contact.getName().getSurName() + ","
+				+ contact.getNumber().getPhone() + "," + contact.getNumber().getPhone() + ","
+				+ contact.getEmail() + "," + contact.getAddress().getStreet() + ","
+				+ contact.getAddress().getStreetNum() + "," + contact.getAddress().getTown()
+				+ "," + contact.getAddress().getZipCode();
+    }
+    
+	public void updateFile(RegularContact oldContact, RegularContact contact) throws IOException {
 		File tmpFile = new File(System.getProperty(dir) + "/src/contactstemp.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		BufferedWriter writer = new BufferedWriter(new FileWriter(tmpFile));
-		String currentLine;
+		String
+			currentLine,
+			line,
+			dataWritten;
 		boolean firstLine = true;
+		
+		line = toString(oldContact);
+		dataWritten = toString(contact);
 		
 		try {
 			while((currentLine = reader.readLine()) != null) {
@@ -90,7 +105,7 @@ public class ContactRepository {
 					writer.write(currentLine);
 					firstLine = false;
 				} else if(currentLine.equals(line)) {
-					writer.write(nData + "\n");
+					writer.write(dataWritten + "\n");
 				}
 			}
 			
@@ -112,7 +127,7 @@ public class ContactRepository {
 			contact.setFavorite(true);
 			contactList.add(i, contact);
 			
-			updateFile(contactList.get(i).toString(), contact.toString());
+			updateFile(contactList.get(i), contact);
 		}
 	}
 	
@@ -123,7 +138,7 @@ public class ContactRepository {
 			contact.setUrgent(true);
 			contactList.add(i, contact);
 			
-			updateFile(contactList.get(i).toString(), contact.toString());
+			updateFile(contactList.get(i), contact);
 		}
 	}
 	
@@ -134,7 +149,7 @@ public class ContactRepository {
 			contact.setFavorite(false);
 			contactList.add(i, contact);
 			
-			updateFile(contactList.toString(), contact.toString());
+			updateFile(contactList.get(i), contact);
 		}
 	}
 	
@@ -142,10 +157,10 @@ public class ContactRepository {
 		if(contact.isUrgent()) {
 			// Replace the changed contact
 			int i = contactList.indexOf(contact);
-			contact.setUrgent(false);;
+			contact.setUrgent(false);
 			contactList.add(i, contact);
 			
-			updateFile(contactList.toString(), contact.toString());
+			updateFile(contactList.get(i), contact);
 		}
 	}
 	
